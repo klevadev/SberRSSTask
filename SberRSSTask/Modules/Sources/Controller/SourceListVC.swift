@@ -5,9 +5,10 @@
 //  Created by Lev Kolesnikov on 03.11.2020.
 //
 import UIKit
+import SnapKit
 
 protocol SourceListDataDelegate: AnyObject {
-    func updateSource(source: Source)
+    func updateSource(source: SourceRealm)
 }
 
 class SourceListVC: UIViewController {
@@ -52,7 +53,7 @@ class SourceListVC: UIViewController {
         }
         
         let cancel = UIAlertAction(title: "Отмена", style: UIAlertAction.Style.default, handler: {
-                                    (action : UIAlertAction) -> Void in })
+            (action : UIAlertAction) -> Void in })
         
         alert.addAction(cancel)
         
@@ -61,14 +62,14 @@ class SourceListVC: UIViewController {
                   let urlTextField = alert.textFields?[1] else { return }
             
             guard let title = titleTextField.text, let url = urlTextField.text else { return }
-                        
+            
             self.viewModel.createNewSource(title: title, url: url, isCurrent: true)
             guard let currentSource = self.viewModel.currentSource else { return }
             
             self.tableView.reloadData()
             self.delegate?.updateSource(source: currentSource)
-            self.viewModel.saveSourcesInUserDefaults()
-           
+            self.viewModel.saveSourcesToRealm()
+            
             titleTextField.text = ""
             urlTextField.text = ""
             saveAction.isEnabled = false
@@ -76,7 +77,7 @@ class SourceListVC: UIViewController {
         
         save.isEnabled = false
         alert.addAction(save)
-    
+        
         return alert
     }()
     
@@ -88,14 +89,15 @@ class SourceListVC: UIViewController {
         setupTableView()
         setupAddSourceBarButton()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = SourceListViewModel()
-        viewModel.loadSourcesFromUserDefaults()
+        viewModel.loadSourcesFromRealm()
     }
     
     @objc func addSourceClicked(btn: UIBarButtonItem){
+        
         self.present(addSourceAlert, animated: true, completion: nil)
     }
     
@@ -119,13 +121,20 @@ class SourceListVC: UIViewController {
     
     // Установка Constraint для UITableView
     private func setupConstraints() {
-        tableView.fillToSuperView(view: view)
         
-        emptySourceLabel.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
-        emptySourceLabel.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 50).isActive = true
-
-        emptySourceImage.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
-        emptySourceImage.topAnchor.constraint(equalTo: emptySourceLabel.bottomAnchor, constant: 25).isActive = true
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
+        emptySourceLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(tableView.snp.centerX)
+            make.top.equalTo(tableView.snp.top).offset(50)
+        }
+        
+        emptySourceImage.snp.makeConstraints { make in
+            make.centerX.equalTo(tableView.snp.centerX)
+            make.top.equalTo(emptySourceLabel.snp.bottom).offset(25)
+        }
     }
     
     private func setupAddSourceBarButton() {
@@ -141,15 +150,14 @@ extension SourceListVC: UITableViewDataSource {
         emptySourceLabel.isHidden = viewModel.getNumberOfRows() != 0
         emptySourceImage.isHidden = viewModel.getNumberOfRows() != 0
         
-       return viewModel.getNumberOfRows()
+        return viewModel.getNumberOfRows()
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-      if editingStyle == .delete {
-        self.viewModel.sources.remove(at: indexPath.row)
-        self.tableView.deleteRows(at: [indexPath], with: .automatic)
-        self.viewModel.saveSourcesInUserDefaults()
-      }
+        if editingStyle == .delete {
+            self.viewModel.removeSource(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -163,11 +171,11 @@ extension SourceListVC: UITableViewDataSource {
 extension SourceListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        viewModel.resetCurrentSource()
+        RealmDataManager.shared.resetCurrentSourceStates(sources: viewModel.sources)
         
         viewModel.currentSource = viewModel.sources[indexPath.row]
         
-        viewModel.sources[indexPath.row].isCurrent = true
+        RealmDataManager.shared.updateIsCurrentSource(source: viewModel.sources[indexPath.row])
         
         tableView.reloadData()
         
@@ -178,7 +186,7 @@ extension SourceListVC: UITableViewDelegate {
 
 //MARK:- UITextFieldDelegate
 extension SourceListVC: UITextFieldDelegate {
-
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

@@ -20,12 +20,15 @@ class NetworkDataFetcher: NetworkDataFetcherProtocol {
     }
     
     func fetchNewsData(sourceURL: String, completion: @escaping (Data?) -> ()) {
-        networking.getNewsData(sourceURL: sourceURL) { (data, error) in
-            if let error = error {
-                print("Error recevied requesting data:  \(error.localizedDescription)")
+        
+        
+        networking.getNewsData(sourceURL: sourceURL) { result in
+            switch result {
+            case .success(let data):
+                completion(data)
+            case .failure:
                 completion(nil)
             }
-            completion(data)
         }
     }
 }

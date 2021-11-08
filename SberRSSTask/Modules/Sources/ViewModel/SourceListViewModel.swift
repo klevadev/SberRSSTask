@@ -8,21 +8,21 @@
 import Foundation
 
 protocol SourceListViewModelProtocol {
-    var sources: [Source] { get set }
-    var currentSource: Source? { get set }
+    var sources: [SourceRealm] { get set }
+    var currentSource: SourceRealm? { get set }
     
     func getNumberOfRows() -> Int
     func cellViewModel(forIndexPath: IndexPath) -> SourceTableViewCellViewModelProtocol?
-    func saveSourcesInUserDefaults()
-    func loadSourcesFromUserDefaults()
+    func saveSourcesToRealm()
+    func loadSourcesFromRealm()
     func createNewSource(title: String, url: String, isCurrent: Bool)
-    func resetCurrentSource()
+    func removeSource(at row: Int)
 }
 
 class SourceListViewModel: SourceListViewModelProtocol {
-    var sources: [Source] = []
+    var sources: [SourceRealm] = []
     
-    var currentSource: Source?
+    var currentSource: SourceRealm?
     
     func getNumberOfRows() -> Int {
         return sources.count
@@ -32,45 +32,27 @@ class SourceListViewModel: SourceListViewModelProtocol {
         SourceTableViewCellViewModel(source: sources[indexPath.row])
     }
     
-    func saveSourcesInUserDefaults() {
-        var sourcesTitle: [String] = []
-        var sourcesURL: [String] = []
-        
-        for i in 0..<sources.count {
-            sourcesTitle.append(sources[i].title)
-            sourcesURL.append(sources[i].url)
-        }
-        
-        UserDataManager.saveSources(sourcesTitle: sourcesTitle, sourcesURL: sourcesURL)
+    func saveSourcesToRealm() {
+        RealmDataManager.shared.saveSources(sources: sources)
     }
     
-    func loadSourcesFromUserDefaults() {
-        sources = []
-        let title = UserDataManager.getSourcesTitle()
-        let url = UserDataManager.getSourcesURL()
-        
-        if !title.isEmpty {
-            for i in 0..<title.count {
-                if i == 0 {
-                    sources.append(Source(title: title[i], url: url[i], isCurrent: true))
-                } else {
-                    sources.append(Source(title: title[i], url: url[i], isCurrent: false))
-                }
-            }
-        }
+    func loadSourcesFromRealm() {
+        let sources = RealmDataManager.shared.loadSources()
+        self.sources = sources
     }
     
     func createNewSource(title: String, url: String, isCurrent: Bool) {
-        let newSource = Source(title: title, url: url, isCurrent: true)
+        let newSource = SourceRealm(title: title, url: url, isCurrent: true)
         currentSource = newSource
-        resetCurrentSource()
+        RealmDataManager.shared.resetCurrentSourceStates(sources: sources)
+        
+        RealmDataManager.shared.createSource(source: newSource)
         self.sources.append(newSource)
     }
     
-    func resetCurrentSource() {
-        if !sources.isEmpty {
-            sources.indices.forEach { sources[$0].isCurrent = false }
-        }
+    func removeSource(at row: Int) {
+        RealmDataManager.shared.deleteSource(sources[row])
+        self.sources.remove(at: row)
     }
 }
 

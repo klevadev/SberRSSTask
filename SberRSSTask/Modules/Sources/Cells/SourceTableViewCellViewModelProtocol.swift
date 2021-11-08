@@ -12,7 +12,7 @@ protocol SourceTableViewCellViewModelProtocol: AnyObject {
 }
 
 class SourceTableViewCellViewModel: SourceTableViewCellViewModelProtocol {
-    private var source: Source
+    private var source: SourceRealm
     
     var title: String {
         return source.title
@@ -26,7 +26,7 @@ class SourceTableViewCellViewModel: SourceTableViewCellViewModelProtocol {
         return source.isCurrent
     }
     
-    init (source: Source) {
+    init (source: SourceRealm) {
         self.source = source
     }
 }

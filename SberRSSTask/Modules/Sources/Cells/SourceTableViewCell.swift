@@ -69,15 +69,13 @@ class SourceTableViewCell: UITableViewCell {
     ///Наложение первого слоя UI
     func overlayFirstLayer() {
         addSubview(cardView)
-
-        cardView.setPosition(top: topAnchor,
-                             left: leftAnchor,
-                             bottom: nil,
-                             right: rightAnchor,
-                             paddingTop: 12,
-                             paddingLeft: 16,
-                             paddingBottom: 12,
-                             paddingRight: 12)
+        
+        cardView.snp.makeConstraints { make in
+            make.top.equalTo(self).offset(12)
+            make.left.equalTo(self).offset(16)
+            make.bottom.equalTo(self).offset(-12)
+            make.right.equalTo(self).offset(-12)
+        }
         
         let bottomConstraint = cardView.bottomAnchor.constraint(equalTo: bottomAnchor)
         bottomConstraint.priority = UILayoutPriority(999)
@@ -90,23 +88,18 @@ class SourceTableViewCell: UITableViewCell {
         cardView.addSubview(titleLabel)
         cardView.addSubview(urlLabel)
         
-        titleLabel.setPosition(top: cardView.topAnchor,
-                                       left: cardView.leftAnchor,
-                                       bottom: nil,
-                                       right: cardView.rightAnchor,
-                                       paddingTop: 16,
-                                       paddingLeft: 12,
-                                       paddingBottom: 0,
-                                       paddingRight: 10)
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(cardView.snp.top).offset(16)
+            make.left.equalTo(cardView.snp.left).offset(12)
+            make.right.equalTo(cardView.snp.right).offset(-10)
+        }
 
-        urlLabel.setPosition(top: titleLabel.bottomAnchor,
-                              left: titleLabel.leftAnchor,
-                              bottom: cardView.bottomAnchor,
-                              right: cardView.rightAnchor,
-                              paddingTop: 4,
-                              paddingLeft: 0,
-                              paddingBottom: 12,
-                              paddingRight: 10)
+        urlLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(4)
+            make.left.equalTo(titleLabel.snp.left)
+            make.bottom.equalTo(cardView.snp.bottom).offset(-12)
+            make.right.equalTo(cardView.snp.right).offset(-10)
+        }
     }
 
 }

@@ -39,14 +39,13 @@ class DetailNewsVC: UIViewController {
         
         let navBarHeight = statusBarHeight + (navigationController?.navigationBar.frame.height ?? 0)
         
-        detailView.setPosition(top: view.topAnchor,
-                               left: view.leftAnchor,
-                               bottom: view.bottomAnchor,
-                               right: view.rightAnchor,
-                               paddingTop: navBarHeight + 8,
-                               paddingLeft: 8,
-                               paddingBottom: 0,
-                               paddingRight: 8)
+        detailView.snp.makeConstraints { make in
+            make.top.equalTo(view.snp.top).offset(navBarHeight + 8)
+            make.left.equalTo(view.snp.left).offset(8)
+            make.bottom.equalTo(view.snp.bottom)
+            make.right.equalTo(view.snp.right).offset(-8)
+            
+        }
     }
     
     private func configureRSSItem() {

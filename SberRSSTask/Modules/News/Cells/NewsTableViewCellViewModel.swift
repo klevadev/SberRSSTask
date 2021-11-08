@@ -15,21 +15,21 @@ protocol NewsTableViewCellViewModelProtocol: AnyObject {
 
 class NewsTableViewCellViewModel: NewsTableViewCellViewModelProtocol {
     
-    private var feed: Feed
+    private var feed: FeedRealm
     
     var title: String {
-        return feed.title ?? ""
+        return feed.title
     }
     
     var date: String {
-        return feed.date?.formattedDate ?? "Ошибка форматирования даты"
+        return feed.date.formattedDate
     }
     
     var isReading: Bool {
         return feed.isReading
     }
     
-    init (feed: Feed) {
+    init (feed: FeedRealm) {
         self.feed = feed
     }
 }

@@ -13,12 +13,12 @@ protocol DetailsNewsViewModelProtocol {
     var description: String { get }
     var date: String { get }
     
-    init(rssItem: Feed)
+    init(rssItem: FeedRealm)
 }
 
 class DetailsNewsViewModel: DetailsNewsViewModelProtocol {
     var title: String {
-        rssItem.title ?? ""
+        rssItem.title
     }
     
     var description: String {
@@ -26,20 +26,20 @@ class DetailsNewsViewModel: DetailsNewsViewModelProtocol {
     }
     
     var date: String {
-        rssItem.date?.formattedDate ?? ""
+        rssItem.date.formattedDate
     }
     
-    private let rssItem: Feed
+    private let rssItem: FeedRealm
     
-    required init(rssItem: Feed) {
+    required init(rssItem: FeedRealm) {
         self.rssItem = rssItem
     }
     
     private func removeHTMLTags(from str: String) -> String {
-        let test = str
+        let text = str
             .replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
             .replacingOccurrences(of: "&[^;]+;", with:
                                     "", options:.regularExpression, range: nil)
-        return test
+        return text
     }
 }

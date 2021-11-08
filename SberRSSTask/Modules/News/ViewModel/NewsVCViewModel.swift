@@ -6,13 +6,14 @@
 //
 
 import Foundation
+import RealmSwift
 
 protocol NewsVCViewModelProtocol: AnyObject {
-    var news: [Feed] { get set }
-    var currentSource: Source { get set }
+    var news: [FeedRealm] { get set }
+    var currentSource: SourceRealm { get set }
     func fetchNewsFromInternet(completion: @escaping() -> Void)
-    func fetchNewsFromCoreData()
-    func saveNewsToCoreData()
+    func fetchNewsFromRealm()
+    func saveNewsToRealm()
     func getNumberOfRows() -> Int
     func cellViewModel(forIndexPath: IndexPath) -> NewsTableViewCellViewModelProtocol
     func viewModelForSelectedRow(at indexPath: IndexPath) -> DetailsNewsViewModelProtocol
@@ -21,25 +22,30 @@ protocol NewsVCViewModelProtocol: AnyObject {
 class NewsVCViewModel: NewsVCViewModelProtocol {
     private let rssParser: RSSParser = RSSParser()
     
-    var news: [Feed] = []
-    var currentSource: Source = Source(title: "Банки.РУ", url: "https://www.banki.ru/xml/news.rss")
+    var news: [FeedRealm] = []
+    // TO DO: - Брать текущий Source из realm
+    var currentSource: SourceRealm = SourceRealm(title: "Банки.РУ", url: "https://www.banki.ru/xml/news.rss", isCurrent: true)
     
     func fetchNewsFromInternet(completion: @escaping () -> Void) {
         news = []
+        RealmDataManager.shared.deleteAllNews()
+
         rssParser.updateNews(currentSource: currentSource.url) { [unowned self] news in
+
             self.news = news
-            self.saveNewsToCoreData()
+            saveNewsToRealm()
+
             completion()
         }
     }
     
-    func fetchNewsFromCoreData() {
-        guard let news = CoreDataManager.shared.loadNews() else { return }
+    func fetchNewsFromRealm() {
+        let news = RealmDataManager.shared.fetchNews()
         self.news = news
     }
     
-    func saveNewsToCoreData() {
-        CoreDataManager.shared.saveNews(news: news)
+    func saveNewsToRealm() {
+        RealmDataManager.shared.saveNewsArray(news: news)
     }
     
     func getNumberOfRows() -> Int {

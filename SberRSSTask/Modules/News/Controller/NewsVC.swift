@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import RealmSwift
 
 class NewsVC: UIViewController {
     
@@ -62,7 +63,7 @@ class NewsVC: UIViewController {
             refreshControl.endRefreshing()
         } else {
             print("Internet Connection not Available!")
-            viewModel.fetchNewsFromCoreData()
+            viewModel.fetchNewsFromRealm()
         }
     }
     
@@ -73,7 +74,6 @@ class NewsVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewModel.saveNewsToCoreData()
     }
     
     
@@ -105,14 +105,21 @@ class NewsVC: UIViewController {
     }
     
     // Установка Constraint для UITableView
-    private func setupConstraints() {
-        tableView.fillToSuperView(view: view)
+    private func setupConstraints() {        
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
         
-        emptyNewsLabel.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
-        emptyNewsLabel.topAnchor.constraint(equalTo: tableView.topAnchor, constant: 50).isActive = true
+        emptyNewsLabel.snp.makeConstraints { make in
+            make.centerX.equalTo(tableView.snp.centerX)
+            make.top.equalTo(tableView.snp.top).offset(50)
+        }
+        
+        emptyNewsImage.snp.makeConstraints { make in
+            make.centerX.equalTo(tableView.snp.centerX)
+            make.top.equalTo(emptyNewsLabel.snp.bottom).offset(25)
+        }
 
-        emptyNewsImage.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
-        emptyNewsImage.topAnchor.constraint(equalTo: emptyNewsLabel.bottomAnchor, constant: 25).isActive = true
     }
 }
 //MARK:- UITableViewDataSource
@@ -139,9 +146,8 @@ extension NewsVC: UITableViewDelegate {
         let detailVC = DetailNewsVC()
         detailVC.hidesBottomBarWhenPushed = true
         
-        viewModel.news[indexPath.row].isReading = true
+        RealmDataManager.shared.updateIsReading(news: viewModel.news[indexPath.row])
         tableView.reloadData()
-        CoreDataManager.shared.saveNews(news: viewModel.news)
         
         detailVC.viewModel = viewModel.viewModelForSelectedRow(at: indexPath)
         self.navigationController?.pushViewController(detailVC, animated: true)
@@ -150,7 +156,7 @@ extension NewsVC: UITableViewDelegate {
 
 //MARK:- SourceListDataDelegate
 extension NewsVC: SourceListDataDelegate {
-    func updateSource(source: Source) {
+    func updateSource(source: SourceRealm) {
         viewModel.currentSource = source
         updateNews()
     }

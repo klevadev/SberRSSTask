@@ -75,26 +75,20 @@ class DetailView: UIView {
     func overlayFirstLayer() {
         addSubview(cardView)
         addSubview(lineView)
-
-        cardView.setPosition(top: topAnchor,
-                             left: leftAnchor,
-                             bottom: bottomAnchor,
-                             right: rightAnchor,
-                             paddingTop: 12,
-                             paddingLeft: 4,
-                             paddingBottom: 12,
-                             paddingRight: 4)
         
-        lineView.setPosition(top: cardView.topAnchor,
-                             left: cardView.leftAnchor,
-                             bottom: nil,
-                             right: cardView.rightAnchor,
-                             paddingTop: 0,
-                             paddingLeft: 0,
-                             paddingBottom: 0,
-                             paddingRight: 0,
-                             width: 0,
-                             height: 3)
+        cardView.snp.makeConstraints { make in
+            make.top.equalTo(self).offset(12)
+            make.left.equalTo(self).offset(4)
+            make.bottom.equalTo(self).offset(-12)
+            make.right.equalTo(self).offset(-4)
+        }
+        
+        lineView.snp.makeConstraints { make in
+            make.top.equalTo(self)
+            make.left.equalTo(self)
+            make.right.equalTo(self)
+            make.height.equalTo(3)
+        }
     }
     
     ///Наложение второго слоя UI
@@ -104,33 +98,25 @@ class DetailView: UIView {
         cardView.addSubview(titleLabel)
         cardView.addSubview(detailTextView)
         
-        dateLabel.setPosition(top: cardView.topAnchor,
-                              left: cardView.leftAnchor,
-                              bottom: nil,
-                              right: nil,
-                              paddingTop: 8,
-                              paddingLeft: 8,
-                              paddingBottom: 0,
-                              paddingRight: 0)
+        
+        dateLabel.snp.makeConstraints { make in
+            make.top.equalTo(cardView.snp.top).offset(8)
+            make.left.equalTo(cardView.snp.left).offset(8)
+        }
+        
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalTo(dateLabel.snp.bottom).offset(4)
+            make.left.equalTo(dateLabel.snp.left)
+            make.right.equalTo(cardView.snp.right).offset(-8)
+        }
         
         
-        titleLabel.setPosition (top: dateLabel.bottomAnchor,
-                                left: dateLabel.leftAnchor,
-                                bottom: nil,
-                                right: cardView.rightAnchor,
-                                paddingTop: 4,
-                                paddingLeft: 0,
-                                paddingBottom: 0,
-                                paddingRight: 8)
-        
-        detailTextView.setPosition(top: titleLabel.bottomAnchor,
-                                   left: dateLabel.leftAnchor,
-                                   bottom: cardView.bottomAnchor,
-                                   right: cardView.rightAnchor,
-                                   paddingTop: 4,
-                                   paddingLeft: 0,
-                                   paddingBottom: 0,
-                                   paddingRight: 8)
+        detailTextView.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom).offset(4)
+            make.left.equalTo(dateLabel.snp.left)
+            make.right.equalTo(cardView.snp.right).offset(-8)
+            make.bottom.equalTo(cardView.snp.bottom)
+        }
         
     }
 }

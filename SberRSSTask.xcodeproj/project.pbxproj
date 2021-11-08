@@ -3,26 +3,28 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		A80E674F2718425A00FB912E /* DetailsNewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80E674E2718425A00FB912E /* DetailsNewsViewModel.swift */; };
-		A8A0499627198BCC00A42E2E /* TestableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A0499527198BCC00A42E2E /* TestableViewController.swift */; };
+		A85A3B2A27397B8600CD53DB /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = A85A3B2927397B8600CD53DB /* SnapKit */; };
+		A85A3B2D27397D9700CD53DB /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = A85A3B2C27397D9700CD53DB /* Alamofire */; };
+		A85A3B302739882F00CD53DB /* FeedRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A85A3B2F2739882F00CD53DB /* FeedRealm.swift */; };
+		A85A3B33273988E000CD53DB /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = A85A3B32273988E000CD53DB /* Realm */; };
+		A85A3B35273988E000CD53DB /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = A85A3B34273988E000CD53DB /* RealmSwift */; };
+		A8A93E9B2739960C00BC9163 /* RealmDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A93E9A2739960C00BC9163 /* RealmDataManager.swift */; };
 		CF6607EC2550A4BE0033019C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6607EB2550A4BE0033019C /* AppDelegate.swift */; };
 		CF6607EE2550A4BE0033019C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6607ED2550A4BE0033019C /* SceneDelegate.swift */; };
 		CF6607F52550A4C10033019C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF6607F42550A4C10033019C /* Assets.xcassets */; };
 		CF6607F82550A4C10033019C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF6607F62550A4C10033019C /* LaunchScreen.storyboard */; };
-		CF6608042550A6C50033019C /* FeedModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CF6608022550A6C50033019C /* FeedModel.xcdatamodeld */; };
 		CF6608232550A9ED0033019C /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6608222550A9ED0033019C /* ThemeManager.swift */; };
 		CF6608262550AA0B0033019C /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6608252550AA0B0033019C /* Extension+UIView.swift */; };
-		CF6608292550AA350033019C /* UserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6608282550AA350033019C /* UserDataManager.swift */; };
 		CF66082C2550AA5F0033019C /* ReaderBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF66082B2550AA5F0033019C /* ReaderBaseVC.swift */; };
 		CF66082F2550AA9C0033019C /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF66082E2550AA9C0033019C /* Extension+UIImage.swift */; };
 		CF660832255142720033019C /* RSSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF660831255142720033019C /* RSSParser.swift */; };
 		CF6608352551427E0033019C /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6608342551427E0033019C /* NetworkService.swift */; };
 		CF6608382551428A0033019C /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF6608372551428A0033019C /* NetworkDataFetcher.swift */; };
-		CF66083B255142A10033019C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF66083A255142A10033019C /* CoreDataManager.swift */; };
 		CF660843255144950033019C /* NewsVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF660842255144950033019C /* NewsVCViewModel.swift */; };
 		CF660847255144BE0033019C /* NewsTableViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF660846255144BE0033019C /* NewsTableViewCellViewModel.swift */; };
 		CF66084A255144D70033019C /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF660849255144D70033019C /* Extension+String.swift */; };
@@ -42,23 +44,21 @@
 
 /* Begin PBXFileReference section */
 		A80E674E2718425A00FB912E /* DetailsNewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsNewsViewModel.swift; sourceTree = "<group>"; };
-		A8A0499527198BCC00A42E2E /* TestableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestableViewController.swift; sourceTree = "<group>"; };
+		A85A3B2F2739882F00CD53DB /* FeedRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRealm.swift; sourceTree = "<group>"; };
+		A8A93E9A2739960C00BC9163 /* RealmDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmDataManager.swift; sourceTree = "<group>"; };
 		CF6607E82550A4BE0033019C /* SberRSSTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SberRSSTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF6607EB2550A4BE0033019C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CF6607ED2550A4BE0033019C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CF6607F42550A4C10033019C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CF6607F72550A4C10033019C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CF6607F92550A4C10033019C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CF6608032550A6C50033019C /* FeedModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FeedModel.xcdatamodel; sourceTree = "<group>"; };
 		CF6608222550A9ED0033019C /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
 		CF6608252550AA0B0033019C /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
-		CF6608282550AA350033019C /* UserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataManager.swift; sourceTree = "<group>"; };
 		CF66082B2550AA5F0033019C /* ReaderBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderBaseVC.swift; sourceTree = "<group>"; };
 		CF66082E2550AA9C0033019C /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
 		CF660831255142720033019C /* RSSParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSParser.swift; sourceTree = "<group>"; };
 		CF6608342551427E0033019C /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		CF6608372551428A0033019C /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
-		CF66083A255142A10033019C /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		CF660842255144950033019C /* NewsVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsVCViewModel.swift; sourceTree = "<group>"; };
 		CF660846255144BE0033019C /* NewsTableViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCellViewModel.swift; sourceTree = "<group>"; };
 		CF660849255144D70033019C /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
@@ -81,6 +81,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A85A3B35273988E000CD53DB /* RealmSwift in Frameworks */,
+				A85A3B33273988E000CD53DB /* Realm in Frameworks */,
+				A85A3B2A27397B8600CD53DB /* SnapKit in Frameworks */,
+				A85A3B2D27397D9700CD53DB /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,13 +99,20 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		A8A049732718AD7B00A42E2E /* CoreData */ = {
+		A85A3B2E2739881300CD53DB /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CF6608022550A6C50033019C /* FeedModel.xcdatamodeld */,
-				CF66083A255142A10033019C /* CoreDataManager.swift */,
+				A85A3B2F2739882F00CD53DB /* FeedRealm.swift */,
 			);
-			path = CoreData;
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A85A3B36273995D200CD53DB /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				A8A93E9A2739960C00BC9163 /* RealmDataManager.swift */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 		A8A049742718AD8400A42E2E /* Network */ = {
@@ -141,7 +152,6 @@
 				CF66081E2550A7A20033019C /* Storyboards */,
 				CF66081D2550A7990033019C /* Resources */,
 				CF6607F92550A4C10033019C /* Info.plist */,
-				A8A0499527198BCC00A42E2E /* TestableViewController.swift */,
 			);
 			path = SberRSSTask;
 			sourceTree = "<group>";
@@ -158,8 +168,8 @@
 		CF6608072550A7540033019C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A85A3B36273995D200CD53DB /* Realm */,
 				A8A049742718AD8400A42E2E /* Network */,
-				A8A049732718AD7B00A42E2E /* CoreData */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -191,7 +201,6 @@
 			isa = PBXGroup;
 			children = (
 				CF6608222550A9ED0033019C /* ThemeManager.swift */,
-				CF6608282550AA350033019C /* UserDataManager.swift */,
 				CF66085D255145B00033019C /* Reachability.swift */,
 			);
 			path = Helpers;
@@ -216,6 +225,7 @@
 		CF66083D2551443D0033019C /* News */ = {
 			isa = PBXGroup;
 			children = (
+				A85A3B2E2739881300CD53DB /* Model */,
 				CF66083F2551446F0033019C /* ViewModel */,
 				CF660840255144770033019C /* Cells */,
 				CF6608412551447C0033019C /* Controller */,
@@ -334,6 +344,12 @@
 			dependencies = (
 			);
 			name = SberRSSTask;
+			packageProductDependencies = (
+				A85A3B2927397B8600CD53DB /* SnapKit */,
+				A85A3B2C27397D9700CD53DB /* Alamofire */,
+				A85A3B32273988E000CD53DB /* Realm */,
+				A85A3B34273988E000CD53DB /* RealmSwift */,
+			);
 			productName = SberRSSTask;
 			productReference = CF6607E82550A4BE0033019C /* SberRSSTask.app */;
 			productType = "com.apple.product-type.application";
@@ -361,6 +377,11 @@
 				Base,
 			);
 			mainGroup = CF6607DF2550A4BE0033019C;
+			packageReferences = (
+				A85A3B2827397B8600CD53DB /* XCRemoteSwiftPackageReference "SnapKit" */,
+				A85A3B2B27397D9700CD53DB /* XCRemoteSwiftPackageReference "Alamofire" */,
+				A85A3B31273988E000CD53DB /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+			);
 			productRefGroup = CF6607E92550A4BE0033019C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -387,6 +408,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A85A3B302739882F00CD53DB /* FeedRealm.swift in Sources */,
 				CF6608352551427E0033019C /* NetworkService.swift in Sources */,
 				CF66085A255145870033019C /* Extension+Date.swift in Sources */,
 				CF66086F255174420033019C /* DetailNewsVC.swift in Sources */,
@@ -400,13 +422,9 @@
 				CF6607EE2550A4BE0033019C /* SceneDelegate.swift in Sources */,
 				CF66086B255174230033019C /* DetailView.swift in Sources */,
 				CF66088C25518B1F0033019C /* Extension+UIAlertController.swift in Sources */,
-				CF6608292550AA350033019C /* UserDataManager.swift in Sources */,
 				CF66088325518A850033019C /* SourceListViewModel.swift in Sources */,
-				CF66083B255142A10033019C /* CoreDataManager.swift in Sources */,
 				CF66082F2550AA9C0033019C /* Extension+UIImage.swift in Sources */,
 				CF6608262550AA0B0033019C /* Extension+UIView.swift in Sources */,
-				CF6608042550A6C50033019C /* FeedModel.xcdatamodeld in Sources */,
-				A8A0499627198BCC00A42E2E /* TestableViewController.swift in Sources */,
 				CF66087F25518A610033019C /* SourceTableViewCell.swift in Sources */,
 				CF660855255145500033019C /* Source.swift in Sources */,
 				CF66088625518AAB0033019C /* SourceTableViewCellViewModelProtocol.swift in Sources */,
@@ -416,6 +434,7 @@
 				CF6608232550A9ED0033019C /* ThemeManager.swift in Sources */,
 				CF66085E255145B00033019C /* Reachability.swift in Sources */,
 				CF660843255144950033019C /* NewsVCViewModel.swift in Sources */,
+				A8A93E9B2739960C00BC9163 /* RealmDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,18 +635,55 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCVersionGroup section */
-		CF6608022550A6C50033019C /* FeedModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				CF6608032550A6C50033019C /* FeedModel.xcdatamodel */,
-			);
-			currentVersion = CF6608032550A6C50033019C /* FeedModel.xcdatamodel */;
-			path = FeedModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
+/* Begin XCRemoteSwiftPackageReference section */
+		A85A3B2827397B8600CD53DB /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
 		};
-/* End XCVersionGroup section */
+		A85A3B2B27397D9700CD53DB /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		A85A3B31273988E000CD53DB /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-cocoa.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A85A3B2927397B8600CD53DB /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A85A3B2827397B8600CD53DB /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		A85A3B2C27397D9700CD53DB /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A85A3B2B27397D9700CD53DB /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		A85A3B32273988E000CD53DB /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A85A3B31273988E000CD53DB /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = Realm;
+		};
+		A85A3B34273988E000CD53DB /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A85A3B31273988E000CD53DB /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CF6607E02550A4BE0033019C /* Project object */;
 }

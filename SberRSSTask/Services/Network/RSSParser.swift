@@ -6,21 +6,20 @@
 //
 
 import Foundation
-import CoreData
+import RealmSwift
 
 class RSSParser: NSObject {
 
-    private var feeds: [Feed] = []
+    private var feeds: [FeedRealm] = []
     private var elementName: String = String()
     private var feedTitle = String()
     private var feedDate = String()
     private var feedDescription = String()
     
-    private let networkDataFetcher = NetworkDataFetcher()
+    private let networkDataFetcher: NetworkDataFetcherProtocol = NetworkDataFetcher()
     
-    func updateNews(currentSource: String, completion: @escaping ([Feed]) -> Void) {
+    func updateNews(currentSource: String, completion: @escaping ([FeedRealm]) -> Void) {
         feeds = []
-        CoreDataManager.shared.deleteNews()
         
         self.networkDataFetcher.fetchNewsData(sourceURL: currentSource) { [unowned self] (data) in
             guard let data = data else { return }
@@ -63,8 +62,9 @@ extension RSSParser: XMLParserDelegate {
     
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "item" {
-            guard let savedNews = CoreDataManager.shared.addNews(feedTitle: feedTitle, feedDate: feedDate, feedDescription: feedDescription) else { return }
-            feeds.append(savedNews)
+            let feed = FeedRealm(title: feedTitle, feedDescription: feedDescription, date: feedDate)
+            RealmDataManager.shared.createNews(news: feed)
+            feeds.append(feed)
         }
     }
 }
